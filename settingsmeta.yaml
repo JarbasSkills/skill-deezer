@@ -1,0 +1,14 @@
+skillMetadata:
+  sections:
+    - name: Deezer
+      fields:
+        - name: email
+          type: email
+          label: Email
+          value: ""
+          placeholder: Email to login
+        - name: password
+          type: password
+          label: Password
+          value: ""
+          placeholder: Password to login

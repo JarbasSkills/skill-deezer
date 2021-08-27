@@ -14,7 +14,15 @@ class DeezerSkill(OVOSCommonPlaybackSkill):
                                 CommonPlayMediaType.MUSIC]
         self.skill_icon = join(dirname(__file__), "ui", "deezer.png")
         self.api = deezeridu.API()
-        self.credentials = JsonConfigXDG("deezer", subfolder="deezeridu")
+    
+    def initialize(self):
+        self.email = self.settings.get('email')
+        self.password = self.settings.get('password')
+        if(not self.email or not self.password)
+          self.credentials = JsonConfigXDG("deezer", subfolder="deezeridu")
+          # TODO: Dont know if this is right, couldnt find a reference to JsonConfigXDG
+          self.email = self.credentials['email']
+          self.password = self.credentials['password']
 
     def get_intro_message(self):
         self.speak_dialog("intro")
@@ -39,7 +47,7 @@ class DeezerSkill(OVOSCommonPlaybackSkill):
                 "bg_image": "http://optional.audioservice.background.jpg"
             }
         """
-        if not isfile(self.credentials.path):
+        if not self.email or not self.password:
             LOG.error(f"Deezer credentials are not set! please edit"
                       f" {self.credentials.path}")
             return []
